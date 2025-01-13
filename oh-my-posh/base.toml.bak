@@ -1,0 +1,197 @@
+# '$schema' = 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json'
+# '$schema' = 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/catppuccin_mocha.omp.json'
+
+version = 2
+final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+# [[blocks.segments]]
+#   type = 'session'
+#   style = 'powerline'
+#   # foreground = 'p:base'
+#   foreground = 'blue'
+#   background = 'tranparent'
+#   # leading_diamond = ''
+#   # trailing_diamond = ''
+#   template = ' {{ if .SSHSession }} {{ end }}{{ .UserName }} '
+
+[[blocks.segments]]
+type = 'path'
+style = 'powerline'
+powerline_symbol = ''
+foreground = 'p:base'
+background = 'p:pink'
+template = '  {{ path .Path .Location }} '
+
+[blocks.segments.properties]
+style = 'full'
+
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+# [[blocks.segments]]
+#   type = 'text'
+#   style = 'plain'
+#   foreground = 'magenta'
+#   background = 'transparent'
+#   template = '>'
+
+[[blocks.segments]]
+type = 'git'
+style = 'powerline'
+powerline_symbol = ''
+foreground = 'p:base'
+foreground_templates = [
+  '{{ if or (.Working.Changed) (.Staging.Changed) }}p:base{{ end }}',
+  '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:white{{ end }}',
+  '{{ if gt .Ahead 0 }}p:white{{ end }}',
+]
+background = 'p:green'
+background_templates = [
+  '{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}',
+  '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}',
+  '{{ if gt .Ahead 0 }}#49416D{{ end }}',
+  '{{ if gt .Behind 0 }}#7A306C{{ end }}',
+]
+template = ' {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+
+[blocks.segments.properties]
+branch_max_length = 25
+fetch_status = true
+fetch_upstream_icon = true
+
+[[blocks.segments]]
+type = 'root'
+style = 'powerline'
+powerline_symbol = ''
+foreground = 'p:white'
+background = 'p:yellow'
+template = '  '
+
+[[blocks.segments]]
+type = 'status'
+style = 'diamond'
+foreground = 'p:white'
+background = 'p:blue'
+background_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
+leading_diamond = '<transparent,background></>'
+trailing_diamond = ''
+template = ' {{ if gt .Code 0 }}{{ else }}{{ end }} '
+
+[blocks.segments.properties]
+always_enabled = true
+
+[[blocks]]
+type = 'rprompt'
+
+[[blocks.segments]]
+type = 'node'
+style = 'plain'
+foreground = 'p:green'
+background = 'transparent'
+template = ' '
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_package_manager = false
+home_enabled = false
+
+[[blocks.segments]]
+type = 'go'
+style = 'plain'
+foreground = 'p:blue'
+background = 'transparent'
+template = ' '
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+type = 'python'
+style = 'plain'
+foreground = 'p:yellow'
+background = 'transparent'
+template = ' '
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = false
+fetch_virtual_env = false
+
+[[blocks.segments]]
+type = 'shell'
+style = 'plain'
+foreground = 'p:white'
+background = 'transparent'
+template = 'in <p:blue><b>{{ .Name }}</b></> '
+
+[[blocks.segments]]
+type = "elixir"
+style = "plain"
+powerline_symbol = ""
+foreground = "#ffffff"
+background = "#422251"
+template = "  {{ .Full }} "
+
+[[blocks.segments]]
+type = 'time'
+style = 'plain'
+foreground = 'p:white'
+background = 'transparent'
+template = 'at <p:blue><b>{{ .CurrentDate | date "15:04:05" }}</b></>'
+
+[[tooltips]]
+type = 'aws'
+tips = ['aws']
+style = 'diamond'
+foreground = 'p:white'
+background = 'p:peach'
+leading_diamond = ''
+trailing_diamond = ''
+template = '  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} '
+
+[tooltips.properties]
+display_default = true
+
+[[tooltips]]
+type = 'az'
+tips = ['az']
+style = 'diamond'
+foreground = 'p:white'
+background = 'p:blue'
+leading_diamond = ''
+trailing_diamond = ''
+template = '  {{ .Name }} '
+
+[tooltips.properties]
+display_default = true
+
+[transient_prompt]
+foreground = 'p:base'
+background = 'transparent'
+template = '<p:yellow,transparent></><,p:yellow> {{ .Folder }} </><p:yellow,transparent></> '
+
+[secondary_prompt]
+foreground = 'p:base'
+background = 'transparent'
+template = '<p:yellow,transparent></><,p:yellow> > </><p:yellow,transparent></> '
+
+[palette]
+green = '#A6E3A1'
+peach = '#FAB387'
+red = '#F38BA8'
+white = 'p:text'
+text = '#cdd6f4'
+yellow = '#F9E2AF'
+pink = "#F5C2E7"
+lavender = "#B4BEFE"
+blue = "#89B4FA"
+base = "#1e1e2e"
